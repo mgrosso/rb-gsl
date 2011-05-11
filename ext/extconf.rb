@@ -246,6 +246,7 @@ begin
   if na_gemspec
     narray_config = File.join(na_gemspec.full_gem_path, na_gemspec.require_path)
     $CPPFLAGS = " -I#{narray_config} "+$CPPFLAGS
+    $LOCAL_LIBS += " #{narray_config}/narray.so "
   end
 rescue LoadError
 end
