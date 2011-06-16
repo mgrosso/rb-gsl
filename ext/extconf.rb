@@ -238,19 +238,21 @@ rescue
 end
 
 #narray_config = dir_config("narray")
-narray_config = dir_config('narray',$sitearchdir,$sitearchdir)
+#narray_config = dir_config('narray',$sitearchdir,$sitearchdir)
+narray_config = nil
 # Try to find narray with RubyGems
 begin
   require 'rubygems'
-  na_gemspec=Gem.searcher.find('narray.h')
+  #na_gemspec=Gem.searcher.find('narray.h')
+  na_gemspec = nil
   if na_gemspec
     narray_config = File.join(na_gemspec.full_gem_path, na_gemspec.require_path)
     $CPPFLAGS = " -I#{narray_config} "+$CPPFLAGS
-    $LOCAL_LIBS += " #{narray_config}/narray.so "
   end
 rescue LoadError
 end
-have_narray_h = have_header("narray.h")
+#have_narray_h = have_header("narray.h")
+have_narray_h = nil
 if narray_config
   if RUBY_PLATFORM =~ /cygwin|mingw/
 #    have_library("narray") || raise("ERROR: narray import library is not found") 
