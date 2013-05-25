@@ -60,11 +60,13 @@ static VALUE rb_gsl_ieee_fprintf_double(int argc, VALUE *argv, VALUE obj)
   if (TYPE(vtmp) != T_FLOAT)
     rb_raise(rb_eTypeError, "wrong argument type %s (Float expected)",
 	     rb_class2name(CLASS_OF(vtmp)));
+  double v;
 #ifdef RUBY_1_9_LATER
-  gsl_ieee_fprintf_double(fp, &(RFLOAT_VALUE(vtmp)));
+  v = RFLOAT_VALUE(vtmp);
 #else
-  gsl_ieee_fprintf_double(fp, &(RFLOAT(vtmp)->value));
+  v = RFLOAT(vtmp)->value;
 #endif
+  gsl_ieee_fprintf_double(fp, &v);
   if (fp == stdout) fprintf(stdout, "\n");
   if (flag == 1) fclose(fp);
   return obj;
